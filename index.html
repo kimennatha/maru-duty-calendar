@@ -53,16 +53,25 @@ body{font-family:var(--font-sans, Arial, sans-serif);background:var(--color-back
 .t-holiday{background:#FCEBEB;color:#A32D2D}
 .t-leave{background:#FAEEDA;color:#854F0B}
 .t-gcal{background:#EEEDFE;color:#3C3489}
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:100}
-.modal{background:var(--color-background-primary);border-radius:var(--border-radius-lg);padding:1.25rem;width:320px;max-width:95vw;border:0.5px solid var(--color-border-secondary)}
-.modal h3{font-size:14px;font-weight:500;margin-bottom:0.75rem;color:var(--color-text-primary)}
-.modal label{font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px}
-.modal input,.modal select{width:100%;margin-bottom:10px;font-size:13px;padding:6px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:100}
+.modal{background:#ffffff;border-radius:14px;padding:1.25rem;width:320px;max-width:95vw;border:1px solid #d9d9d9;box-shadow:0 12px 34px rgba(0,0,0,0.22);color:#222}
+.modal h3{font-size:14px;font-weight:700;margin-bottom:0.75rem;color:#111}
+.modal label{font-size:11px;color:#555;display:block;margin-bottom:3px;font-weight:600}
+.modal input,.modal select{width:100%;margin-bottom:10px;font-size:13px;padding:7px 10px;border:1px solid #cfcfcf;border-radius:8px;background:#ffffff;color:#111;outline:none}
+.modal input:focus,.modal select:focus{border-color:#1D9E75;box-shadow:0 0 0 2px rgba(29,158,117,0.16)}
+.modal .elist{background:#ffffff;color:#222}
+.erow{background:#ffffff;color:#222}
+.erow span{color:inherit}
+.modal p{color:#555}
+.modal .btn{background:#ffffff;color:#222;border:1px solid #cfcfcf}
+.modal .btn.green{background:#1D9E75;color:#ffffff;border-color:#1D9E75}
+.modal .btn.red{background:#A32D2D;color:#ffffff;border-color:#A32D2D}
 .modal-btns{display:flex;gap:8px;justify-content:flex-end}
 .elist{margin-top:6px;max-height:200px;overflow-y:auto}
 .erow{display:flex;align-items:center;gap:5px;font-size:11px;padding:4px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
 .erow:last-child{border:none}
-.del{font-size:10px;color:#E24B4A;background:none;border:none;cursor:pointer;padding:0 2px;margin-left:auto;flex-shrink:0}
+.edit{font-size:10px;color:#185FA5;background:none;border:none;cursor:pointer;padding:0 4px;margin-left:auto;flex-shrink:0}
+.del{font-size:10px;color:#E24B4A;background:none;border:none;cursor:pointer;padding:0 2px;flex-shrink:0}
 .gcal-badge{font-size:9px;background:#EEEDFE;color:#3C3489;padding:1px 4px;border-radius:3px;flex-shrink:0}
 
 .auth-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:#F7F8FA}
@@ -126,7 +135,7 @@ body{font-family:var(--font-sans, Arial, sans-serif);background:var(--color-back
 
 <div class="modal-bg" id="add-modal" style="display:none">
 <div class="modal">
-  <h3>일정 추가</h3>
+  <h3 id="add-modal-title">일정 추가</h3>
   <label>날짜</label><input type="date" id="inp-date">
   <label>종류</label>
   <select id="inp-type">
@@ -138,7 +147,7 @@ body{font-family:var(--font-sans, Arial, sans-serif);background:var(--color-back
   <label>내용</label><input type="text" id="inp-text" placeholder="예: 김진경 T, 어린이날, 안전교육">
   <div class="modal-btns">
     <button class="btn" onclick="closeAdd()">취소</button>
-    <button class="btn green" onclick="saveEntry()">저장</button>
+    <button class="btn green" id="save-entry-btn" onclick="saveEntry()">저장</button>
   </div>
 </div>
 </div>
@@ -183,6 +192,8 @@ const MKR = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10�
 
 let cur = new Date(2026, 4, 1);
 let selDate = null;
+let editKey = null;
+let editIndex = null;
 let gapiReady = false;
 let gisReady = false;
 let tokenClient = null;
@@ -198,6 +209,28 @@ let data = {
 function key(y,m,d){return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
 function todayKey(){let t=new Date();return key(t.getFullYear(),t.getMonth(),t.getDate())}
 function isHoliday(k){return (data[k]||[]).some(e=>e.type==='holiday')}
+
+// 한국 시간 기준 날짜 처리
+// Google Calendar의 하루 종일 일정은 YYYY-MM-DD 그대로 사용하고,
+// 시간이 있는 일정은 Asia/Seoul 기준으로 다시 계산해 하루 밀림을 방지합니다.
+function pad2(n){return String(n).padStart(2,'0')}
+function koreanDateStringFromDate(date){
+  const parts=new Intl.DateTimeFormat('en-CA',{
+    timeZone:'Asia/Seoul', year:'numeric', month:'2-digit', day:'2-digit'
+  }).formatToParts(date).reduce((acc,p)=>{acc[p.type]=p.value;return acc;},{});
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
+function koreanMonthStartIso(y,m){return `${y}-${pad2(m+1)}-01T00:00:00+09:00`}
+function koreanNextMonthStartIso(y,m){
+  const ny=m===11?y+1:y;
+  const nm=m===11?0:m+1;
+  return `${ny}-${pad2(nm+1)}-01T00:00:00+09:00`;
+}
+function googleEventStartDateKey(ev){
+  if(ev.start && ev.start.date) return ev.start.date; // 하루 종일 일정: 날짜 문자열을 그대로 사용
+  if(ev.start && ev.start.dateTime) return koreanDateStringFromDate(new Date(ev.start.dateTime));
+  return null;
+}
 
 // Google API 로드
 function loadGapiScript(){
@@ -258,12 +291,15 @@ async function fetchGcalEvents(){
   if(!isSignedIn){handleGcalBtn();return;}
   setStatus('구글 캘린더 불러오는 중...', false, true);
   const y=cur.getFullYear(), m=cur.getMonth();
-  const timeMin=new Date(y,m,1).toISOString();
-  const timeMax=new Date(y,m+1,0,23,59,59).toISOString();
+  // UTC 변환(toISOString) 대신 한국 시간(+09:00) 기준 범위를 직접 전달합니다.
+  // 이렇게 해야 구글 캘린더 일정이 하루 앞/뒤로 밀리지 않습니다.
+  const timeMin=koreanMonthStartIso(y,m);
+  const timeMax=koreanNextMonthStartIso(y,m);
   try{
     const resp=await gapi.client.calendar.events.list({
       calendarId:'primary',
       timeMin, timeMax,
+      timeZone:'Asia/Seoul',
       singleEvents:true,
       orderBy:'startTime',
       maxResults:100
@@ -275,9 +311,8 @@ async function fetchGcalEvents(){
     });
     let count=0;
     events.forEach(ev=>{
-      const start=ev.start.date||ev.start.dateTime;
-      if(!start) return;
-      const d=start.substring(0,10);
+      const d=googleEventStartDateKey(ev);
+      if(!d) return;
       if(!data[d]) data[d]=[];
       // 중복 방지
       if(!data[d].some(e=>e.type==='gcal'&&e.text===ev.summary)){
@@ -371,21 +406,64 @@ function changeMonth(d){
   if(isSignedIn) fetchGcalEvents();
 }
 
+function resetEditMode(){
+  editKey = null;
+  editIndex = null;
+  document.getElementById('add-modal-title').textContent='일정 추가';
+  document.getElementById('save-entry-btn').textContent='저장';
+}
+
 function openAdd(pre){
+  resetEditMode();
   document.getElementById('inp-date').value=pre||'';
   document.getElementById('inp-type').value='duty';
   document.getElementById('inp-text').value='';
   document.getElementById('add-modal').style.display='flex';
 }
-function closeAdd(){document.getElementById('add-modal').style.display='none'}
+function closeAdd(){
+  document.getElementById('add-modal').style.display='none';
+  resetEditMode();
+}
 function saveEntry(){
   const d=document.getElementById('inp-date').value;
   const t=document.getElementById('inp-type').value;
   const tx=document.getElementById('inp-text').value.trim();
   if(!d||!tx){alert('날짜와 내용을 입력해주세요');return}
-  if(!data[d])data[d]=[];
+
+  if(editKey!==null && editIndex!==null){
+    if(data[editKey] && data[editKey][editIndex]){
+      data[editKey].splice(editIndex,1);
+      if(!data[editKey].length) delete data[editKey];
+    }
+  }
+
+  if(!data[d]) data[d]=[];
   data[d].push({type:t,text:tx});
-  closeAdd();render();
+  closeAdd();
+  render();
+  if(selDate){
+    if(document.getElementById('detail-modal').style.display==='flex'){
+      renderElist(selDate);
+    }
+  }
+}
+
+function editEntry(k,i){
+  const e=(data[k]||[])[i];
+  if(!e) return;
+  if(e.type==='gcal'){
+    alert('구글 캘린더에서 불러온 일정은 이 앱에서 직접 수정할 수 없어요. 구글 캘린더에서 수정한 뒤 다시 불러오기를 눌러주세요.');
+    return;
+  }
+  editKey=k;
+  editIndex=i;
+  document.getElementById('add-modal-title').textContent='일정 수정';
+  document.getElementById('save-entry-btn').textContent='수정 저장';
+  document.getElementById('inp-date').value=k;
+  document.getElementById('inp-type').value=e.type;
+  document.getElementById('inp-text').value=e.text;
+  document.getElementById('detail-modal').style.display='none';
+  document.getElementById('add-modal').style.display='flex';
 }
 
 function openDetail(k,d){
@@ -399,23 +477,27 @@ function renderElist(k){
   const entries=data[k]||[];
   const lbl={duty:'당직',event:'행사',holiday:'공휴일',leave:'휴가',gcal:'구글'};
   if(!entries.length){
-    document.getElementById('elist').innerHTML='<p style="font-size:12px;color:var(--color-text-secondary);padding:8px 0">등록된 일정이 없습니다.</p>';
+    document.getElementById('elist').innerHTML='<p style="font-size:12px;color:#555;padding:8px 0">등록된 일정이 없습니다.</p>';
     return;
   }
   document.getElementById('elist').innerHTML=entries.map((e,i)=>{
     const ti=e.type==='duty'?TEACHERS.indexOf(e.text):-1;
     const bg=ti>=0?TB[ti]:e.type==='event'?'#EAF3DE':e.type==='holiday'?'#FCEBEB':e.type==='gcal'?'#EEEDFE':'#FAEEDA';
     const co=ti>=0?TC[ti]:e.type==='event'?'#3B6D11':e.type==='holiday'?'#A32D2D':e.type==='gcal'?'#3C3489':'#854F0B';
-    const delBtn=e.type==='gcal'?'':`<button class="del" onclick="delEntry('${k}',${i})">✕</button>`;
+    const editBtn=e.type==='gcal'?'':`<button class="edit" onclick="editEntry('${k}',${i})">수정</button>`;
+    const delBtn=e.type==='gcal'?'':`<button class="del" onclick="delEntry('${k}',${i})">삭제</button>`;
     const gcalBadge=e.type==='gcal'?'<span class="gcal-badge">구글</span>':'';
     return `<div class="erow">
       <span class="tag" style="background:${bg};color:${co};margin:0;flex-shrink:0">${lbl[e.type]}</span>
-      <span style="flex:1;color:var(--color-text-primary);font-size:12px;padding:0 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.text}</span>
-      ${gcalBadge}${delBtn}
+      <span style="flex:1;color:#222;font-size:12px;padding:0 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.text}</span>
+      ${gcalBadge}${editBtn}${delBtn}
     </div>`;
   }).join('');
 }
 function delEntry(k,i){
+  const e=(data[k]||[])[i];
+  if(!e) return;
+  if(!confirm(`'${e.text}' 일정을 삭제할까요?`)) return;
   data[k].splice(i,1);
   if(!data[k].length)delete data[k];
   renderElist(k);render();
