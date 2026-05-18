@@ -155,7 +155,7 @@ function loadGisScript(){return new Promise(res=>{if(window.google&&google.accou
 async function handleGcalBtn(){setStatus('구글 로그인 준비 중...',false,true);if(!gapiReady||!gisReady)await Promise.all([loadGapiScript(),loadGisScript()]);tokenClient.requestAccessToken({prompt:'consent'})}
 function setStatus(msg,connected,loading){const dot=document.getElementById('status-dot');dot.className='status-dot'+(connected?' connected':loading?' loading':'');document.getElementById('status-text').textContent=msg}
 async function fetchGcalEvents(){if(!isSignedIn){handleGcalBtn();return}setStatus('구글 캘린더 불러오는 중...',false,true);const {timeMin,timeMax}=monthRangeKst();try{const resp=await gapi.client.calendar.events.list({calendarId:'primary',timeMin,timeMax,timeZone:'Asia/Seoul',singleEvents:true,orderBy:'startTime',maxResults:100});Object.keys(data).forEach(k=>{data[k]=data[k].filter(e=>e.type!=='gcal');if(!data[k].length)delete data[k]});let count=0;(resp.result.items||[]).forEach(ev=>{const start=ev.start.date||ev.start.dateTime;if(!start)return;const d=ev.start.date?ev.start.date:kstDateFromDateTime(ev.start.dateTime);const id=gcalId(ev);if(hiddenGcal[id])return;if(!data[d])data[d]=[];data[d].push({type:'gcal',text:ev.summary||'(제목 없음)',gcalId:id});count++});setStatus(`구글 캘린더 연동됨 · 이번 달 원본 일정 ${count}개 표시`,true);render()}catch(e){setStatus('불러오기 실패: '+e.message,false)}}
-function autoAssign(){function autoAssign(){
+function autoAssign(){
   const y = cur.getFullYear();
   const m = cur.getMonth();
   const last = new Date(y, m+1, 0).getDate();
