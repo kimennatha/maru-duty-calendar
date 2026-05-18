@@ -370,7 +370,7 @@ function render(){
     let tags=entries.slice(0,3).map(e=>{
       if(e.type==='duty'){
         const ti=TEACHERS.indexOf(e.text);
-        return `<span class="tag" style="background:${ti>=0?TB[ti]:'#E6F1FB'};color:${ti>=0?TC[ti]:'#185FA5'}">${e.text}</span>`;
+        return `<span class="tag" style="background:#FFFFFF;color:${ti>=0?TC[ti]:'#185FA5'};border:1px solid ${ti>=0?TC[ti]:'#185FA5'}">${e.text}</span>`;
       }
       return `<span class="tag t-${e.type}">${e.text}</span>`;
     }).join('');
