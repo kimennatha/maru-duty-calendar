@@ -130,7 +130,14 @@ body{font-family:Arial,'Noto Sans KR',sans-serif;background:#fff;color:#222}.wra
 <body>
 <div class="auth-screen" id="auth-screen"><div class="auth-box"><h1>마루 당직·휴가 캘린더</h1><p>비밀번호를 입력해 주세요.</p><input type="password" id="auth-pass" placeholder="비밀번호"><button onclick="checkPassword()">들어가기</button><div class="auth-error" id="auth-error"></div></div></div>
 <div class="wrap" id="app-wrap" style="display:none">
-<div class="top-bar"><div class="nav"><button onclick="changeMonth(-1)">‹</button><span class="month-label" id="mlabel"></span><button onclick="changeMonth(1)">›</button></div><button class="btn google" id="gcal-btn" onclick="handleGcalBtn()">구글 캘린더 연동</button><button class="btn green" onclick="autoAssign()">⟳ 당직 자동배정</button><button class="btn blue" onclick="exportExcel()">↓ 엑셀 저장</button><button class="btn" onclick="window.print()">🖨 인쇄</button><button class="btn" onclick="openAdd()">+ 추가</button></div>
+<div class="top-bar"><div class="nav"><button onclick="changeMonth(-1)">‹</button><span class="month-label" id="mlabel"></span><button onclick="changeMonth(1)">›</button></div><button class="btn google" id="gcal-btn" onclick="handleGcalBtn()">구글 캘린더 연동</button><select id="start-teacher" class="btn">
+  <option value="0">김진경 T부터</option>
+  <option value="1">장현주 T부터</option>
+  <option value="2">박정노 T부터</option>
+  <option value="3">장연옥 T부터</option>
+</select>
+
+<button class="btn green" onclick="autoAssign()">⟳ 당직 자동배정</button><button class="btn blue" onclick="exportExcel()">↓ 엑셀 저장</button><button class="btn" onclick="window.print()">🖨 인쇄</button><button class="btn" onclick="openAdd()">+ 추가</button></div>
 <div class="status-bar"><div class="status-dot" id="status-dot"></div><span id="status-text">구글 캘린더 연동 전입니다. 위 버튼을 눌러 연동해 주세요.</span></div>
 <div class="stats-bar" id="stats-bar"></div><div class="legend"><div class="leg-item"><div class="leg-dot" style="background:#fff;border:1px solid #185FA5"></div>당직</div><div class="leg-item"><div class="leg-dot" style="background:#C0DD97"></div>행사·교육</div><div class="leg-item"><div class="leg-dot" style="background:#F7C1C1"></div>공휴일</div><div class="leg-item"><div class="leg-dot" style="background:#FAC775"></div>휴가</div><div class="leg-item"><div class="leg-dot" style="background:#CECBF6"></div>구글 원본</div></div><div class="cal-grid" id="cal"></div></div>
 <div class="modal-bg" id="add-modal" style="display:none"><div class="modal"><h3 id="add-title">일정 추가</h3><label>날짜</label><input type="date" id="inp-date"><label>종류</label><select id="inp-type"><option value="duty">당직</option><option value="event">행사·교육</option><option value="holiday">공휴일</option><option value="leave">휴가</option></select><label>내용</label><input type="text" id="inp-text" placeholder="예: 김진경 T, 어린이날, 안전교육"><div class="modal-btns"><button class="btn" onclick="closeAdd()">취소</button><button class="btn green" onclick="saveEntry()" id="save-btn">저장</button></div></div></div>
@@ -169,28 +176,8 @@ function autoAssign(){
     }
   }
 
-// 이전 달 마지막 당직 다음 교사부터 시작
-let idx = 0;
-
-const prevMonth = new Date(y, m, 0);
-const py = prevMonth.getFullYear();
-const pm = prevMonth.getMonth();
-const plast = prevMonth.getDate();
-
-for(let d=plast; d>=1; d--){
-  const pk = key(py, pm, d);
-  const prevDuty = (data[pk] || []).find(e => e.type === 'duty');
-
-  if(prevDuty){
-    const prevIdx = TEACHERS.indexOf(prevDuty.text);
-
-    if(prevIdx >= 0){
-      idx = (prevIdx + 1) % TEACHERS.length;
-    }
-
-    break;
-  }
-}
+// 선택한 선생님부터 시작
+let idx = Number(document.getElementById('start-teacher').value || 0);
 
   // 당직 자동 배정
   for(let d=1; d<=last; d++){
