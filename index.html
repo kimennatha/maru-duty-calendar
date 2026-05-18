@@ -482,13 +482,13 @@ function renderElist(k){
   }
   document.getElementById('elist').innerHTML=entries.map((e,i)=>{
     const ti=e.type==='duty'?TEACHERS.indexOf(e.text):-1;
-    const bg=ti>=0?TB[ti]:e.type==='event'?'#EAF3DE':e.type==='holiday'?'#FCEBEB':e.type==='gcal'?'#EEEDFE':'#FAEEDA';
+    const bg=e.type==='duty'?'#FFFFFF':ti>=0?TB[ti]:e.type==='event'?'#EAF3DE':e.type==='holiday'?'#FCEBEB':e.type==='gcal'?'#EEEDFE':'#FAEEDA';
     const co=ti>=0?TC[ti]:e.type==='event'?'#3B6D11':e.type==='holiday'?'#A32D2D':e.type==='gcal'?'#3C3489':'#854F0B';
     const editBtn=e.type==='gcal'?'':`<button class="edit" onclick="editEntry('${k}',${i})">수정</button>`;
     const delBtn=e.type==='gcal'?'':`<button class="del" onclick="delEntry('${k}',${i})">삭제</button>`;
     const gcalBadge=e.type==='gcal'?'<span class="gcal-badge">구글</span>':'';
     return `<div class="erow">
-      <span class="tag" style="background:${bg};color:${co};margin:0;flex-shrink:0">${lbl[e.type]}</span>
+      <span class="tag" style="background:${bg};color:${co};border:${e.type==='duty'?'1px solid '+co:'none'};margin:0;flex-shrink:0">${lbl[e.type]}</span>
       <span style="flex:1;color:#222;font-size:12px;padding:0 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.text}</span>
       ${gcalBadge}${editBtn}${delBtn}
     </div>`;
