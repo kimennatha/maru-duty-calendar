@@ -71,6 +71,7 @@ body{font-family:var(--font-sans, Arial, sans-serif);background:var(--color-back
 .erow{display:flex;align-items:center;gap:5px;font-size:11px;padding:4px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
 .erow:last-child{border:none}
 .edit{font-size:10px;color:#185FA5;background:none;border:none;cursor:pointer;padding:0 4px;margin-left:auto;flex-shrink:0}
+.copy{font-size:10px;color:#1D9E75;background:none;border:none;cursor:pointer;padding:0 4px;margin-left:auto;flex-shrink:0}
 .del{font-size:10px;color:#E24B4A;background:none;border:none;cursor:pointer;padding:0 2px;flex-shrink:0}
 .gcal-badge{font-size:9px;background:#EEEDFE;color:#3C3489;padding:1px 4px;border-radius:3px;flex-shrink:0}
 
@@ -466,6 +467,21 @@ function editEntry(k,i){
   document.getElementById('add-modal').style.display='flex';
 }
 
+function copyGcalEntry(k,i){
+  const e=(data[k]||[])[i];
+  if(!e) return;
+  // 구글 원본은 그대로 두고, 앱 안에서 수정 가능한 일반 일정으로 복사합니다.
+  editKey=null;
+  editIndex=null;
+  document.getElementById('add-modal-title').textContent='구글 일정 복사 후 편집';
+  document.getElementById('save-entry-btn').textContent='복사 저장';
+  document.getElementById('inp-date').value=k;
+  document.getElementById('inp-type').value='event';
+  document.getElementById('inp-text').value=e.text;
+  document.getElementById('detail-modal').style.display='none';
+  document.getElementById('add-modal').style.display='flex';
+}
+
 function openDetail(k,d){
   selDate=k;
   const pts=k.split('-');
@@ -484,9 +500,9 @@ function renderElist(k){
     const ti=e.type==='duty'?TEACHERS.indexOf(e.text):-1;
     const bg=e.type==='duty'?'#FFFFFF':ti>=0?TB[ti]:e.type==='event'?'#EAF3DE':e.type==='holiday'?'#FCEBEB':e.type==='gcal'?'#EEEDFE':'#FAEEDA';
     const co=ti>=0?TC[ti]:e.type==='event'?'#3B6D11':e.type==='holiday'?'#A32D2D':e.type==='gcal'?'#3C3489':'#854F0B';
-    const editBtn=e.type==='gcal'?'':`<button class="edit" onclick="editEntry('${k}',${i})">수정</button>`;
+    const editBtn=e.type==='gcal'?`<button class="copy" onclick="copyGcalEntry('${k}',${i})">복사</button>`:`<button class="edit" onclick="editEntry('${k}',${i})">수정</button>`;
     const delBtn=e.type==='gcal'?'':`<button class="del" onclick="delEntry('${k}',${i})">삭제</button>`;
-    const gcalBadge=e.type==='gcal'?'<span class="gcal-badge">구글</span>':'';
+    const gcalBadge=e.type==='gcal'?'<span class="gcal-badge">구글원본</span>':'';
     return `<div class="erow">
       <span class="tag" style="background:${bg};color:${co};border:${e.type==='duty'?'1px solid '+co:'none'};margin:0;flex-shrink:0">${lbl[e.type]}</span>
       <span style="flex:1;color:#222;font-size:12px;padding:0 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.text}</span>
