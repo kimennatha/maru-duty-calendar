@@ -169,8 +169,28 @@ function autoAssign(){
     }
   }
 
-  // 월별 시작 교사 회전
-  let idx = (cur.getMonth() - 4 + TEACHERS.length) % TEACHERS.length;
+// 이전 달 마지막 당직 다음 교사부터 시작
+let idx = 0;
+
+const prevMonth = new Date(y, m, 0);
+const py = prevMonth.getFullYear();
+const pm = prevMonth.getMonth();
+const plast = prevMonth.getDate();
+
+for(let d=plast; d>=1; d--){
+  const pk = key(py, pm, d);
+  const prevDuty = (data[pk] || []).find(e => e.type === 'duty');
+
+  if(prevDuty){
+    const prevIdx = TEACHERS.indexOf(prevDuty.text);
+
+    if(prevIdx >= 0){
+      idx = (prevIdx + 1) % TEACHERS.length;
+    }
+
+    break;
+  }
+}
 
   // 당직 자동 배정
   for(let d=1; d<=last; d++){
