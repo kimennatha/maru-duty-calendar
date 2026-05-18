@@ -47,7 +47,7 @@ body{font-family:var(--font-sans, Arial, sans-serif);background:var(--color-back
 .dnum{font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px;display:inline-flex}
 .sun .dnum{color:#E24B4A}
 .sat .dnum{color:#378ADD}
-.tag{font-size:9px;padding:2px 4px;border-radius:3px;margin-bottom:2px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.tag{font-size:12px;font-weight:600;padding:3px 5px;border-radius:4px;margin-bottom:3px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5}
 .t-duty{background:#E6F1FB;color:#185FA5}
 .t-event{background:#EAF3DE;color:#3B6D11}
 .t-holiday{background:#FCEBEB;color:#A32D2D}
@@ -335,7 +335,7 @@ function autoAssign(){
     const k=key(y,m,d);
     if(data[k]) data[k]=data[k].filter(e=>e.type!=='duty');
   }
-  let idx=0;
+  let idx = cur.getMonth() % TEACHERS.length;
   for(let d=1;d<=last;d++){
     const k=key(y,m,d);
     const dow=new Date(y,m,d).getDay();
