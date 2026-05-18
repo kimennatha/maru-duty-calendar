@@ -155,7 +155,49 @@ function loadGisScript(){return new Promise(res=>{if(window.google&&google.accou
 async function handleGcalBtn(){setStatus('구글 로그인 준비 중...',false,true);if(!gapiReady||!gisReady)await Promise.all([loadGapiScript(),loadGisScript()]);tokenClient.requestAccessToken({prompt:'consent'})}
 function setStatus(msg,connected,loading){const dot=document.getElementById('status-dot');dot.className='status-dot'+(connected?' connected':loading?' loading':'');document.getElementById('status-text').textContent=msg}
 async function fetchGcalEvents(){if(!isSignedIn){handleGcalBtn();return}setStatus('구글 캘린더 불러오는 중...',false,true);const {timeMin,timeMax}=monthRangeKst();try{const resp=await gapi.client.calendar.events.list({calendarId:'primary',timeMin,timeMax,timeZone:'Asia/Seoul',singleEvents:true,orderBy:'startTime',maxResults:100});Object.keys(data).forEach(k=>{data[k]=data[k].filter(e=>e.type!=='gcal');if(!data[k].length)delete data[k]});let count=0;(resp.result.items||[]).forEach(ev=>{const start=ev.start.date||ev.start.dateTime;if(!start)return;const d=ev.start.date?ev.start.date:kstDateFromDateTime(ev.start.dateTime);const id=gcalId(ev);if(hiddenGcal[id])return;if(!data[d])data[d]=[];data[d].push({type:'gcal',text:ev.summary||'(제목 없음)',gcalId:id});count++});setStatus(`구글 캘린더 연동됨 · 이번 달 원본 일정 ${count}개 표시`,true);render()}catch(e){setStatus('불러오기 실패: '+e.message,false)}}
-function autoAssign(){const y=cur.getFullYear(),m=cur.getMonth(),last=new Date(y,m+1,0).getDate();for(let d=1;d<=last;d++){const k=key(y,m,d);if(data[k])data[k]=data[k].filter(e=>e.type!=='duty')}let idx = (cur.getMonth() - 4 + TEACHERS.length) % TEACHERS.length;for(let d=1;d<=last;d++){const k=key(y,m,d),dow=new Date(y,m,d).getDay();if(dow===0||dow===6||isHoliday(k))continue;if(!data[k])data[k]=[];data[k].push({type:'duty',text:TEACHERS[idx%TEACHERS.length]});idx++}render();setStatus(isSignedIn?'구글 캘린더 연동됨 · 당직 자동배정 완료!':'당직 자동배정 완료!',isSignedIn)}
+function autoAssign(){function autoAssign(){
+  const y = cur.getFullYear();
+  const m = cur.getMonth();
+  const last = new Date(y, m+1, 0).getDate();
+
+  // 기존 당직 삭제
+  for(let d=1; d<=last; d++){
+    const k = key(y,m,d);
+
+    if(data[k]){
+      data[k] = data[k].filter(e => e.type !== 'duty');
+    }
+  }
+
+  // 월별 시작 교사 회전
+  let idx = (cur.getMonth() - 4 + TEACHERS.length) % TEACHERS.length;
+
+  // 당직 자동 배정
+  for(let d=1; d<=last; d++){
+    const k = key(y,m,d);
+    const dow = new Date(y,m,d).getDay();
+
+    // 주말 및 공휴일 제외
+    if(dow===0 || dow===6 || isHoliday(k)) continue;
+
+    if(!data[k]) data[k] = [];
+
+    data[k].push({
+      type:'duty',
+      text:TEACHERS[idx % TEACHERS.length]
+    });
+
+    idx++;
+  }
+
+  render();
+
+  setStatus(
+    isSignedIn
+      ? '구글 캘린더 연동됨 · 당직 자동배정 완료!'
+      : '당직 자동배정 완료! 구글 캘린더도 연동해보세요.',
+    isSignedIn
+  )}
 function render(){const y=cur.getFullYear(),m=cur.getMonth();document.getElementById('mlabel').textContent=`${y}년 ${MKR[m]}`;const cal=document.getElementById('cal');cal.innerHTML=DAYS.map(d=>`<div class="day-header">${d}</div>`).join('');const first=new Date(y,m,1).getDay(),last=new Date(y,m+1,0).getDate(),td=todayKey();for(let i=0;i<first;i++)cal.innerHTML+='<div class="cell empty"></div>';for(let d=1;d<=last;d++){const k=key(y,m,d),dow=new Date(y,m,d).getDay(),cls=(dow===0?' sun':dow===6?' sat':''),entries=data[k]||[];let tags=entries.slice(0,4).map(e=>{if(e.type==='duty'){const ti=TEACHERS.indexOf(e.text);const co=ti>=0?TC[ti]:'#185FA5';return `<span class="tag" style="background:#fff;color:${co};border:1px solid ${co}">${e.text}</span>`}return `<span class="tag t-${e.type}">${e.text}</span>`}).join('');if(entries.length>4)tags+=`<span style="font-size:9px;color:#888">+${entries.length-4}</span>`;cal.innerHTML+=`<div class="cell${cls}${k===td?' today':''}" onclick="openDetail('${k}',${d})"><div class="dnum">${d}</div>${tags}</div>`}const rem=(7-(first+last)%7)%7;for(let i=0;i<rem;i++)cal.innerHTML+='<div class="cell empty"></div>';renderStats()}
 function renderStats(){const y=cur.getFullYear(),m=cur.getMonth(),last=new Date(y,m+1,0).getDate(),counts=TEACHERS.map(()=>0);for(let d=1;d<=last;d++){(data[key(y,m,d)]||[]).forEach(e=>{if(e.type==='duty'){const i=TEACHERS.indexOf(e.text);if(i>=0)counts[i]++}})}document.getElementById('stats-bar').innerHTML=TEACHERS.map((t,i)=>`<div class="stat-card"><div class="stat-name" style="color:${TC[i]}">${t}</div><div class="stat-num">${counts[i]}</div><div class="stat-sub">당직 횟수</div></div>`).join('')}
 function changeMonth(d){cur.setMonth(cur.getMonth()+d);render();if(isSignedIn)fetchGcalEvents()}
