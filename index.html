@@ -7,128 +7,15 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--color-background-primary:#fff;--color-background-secondary:#f6f7f9;--color-background-tertiary:#f1f2f4;--color-border-secondary:#d9dde3;--color-border-tertiary:#e7e9ee;--color-text-primary:#222;--color-text-secondary:#555;--color-text-tertiary:#888;--border-radius-md:8px;--border-radius-lg:12px}
-body{font-family:Arial,'Noto Sans KR',sans-serif;background:#fff;color:#222}.wrap{padding:1rem;max-width:1100px;margin:0 auto}.top-bar{display:flex;align-items:center;gap:8px;margin-bottom:1rem;flex-wrap:wrap}.btn{font-size:12px;padding:6px 12px;border:1px solid #d9dde3;border-radius:8px;background:#fff;color:#222;cursor:pointer;white-space:nowrap}.btn:hover{background:#f6f7f9}.btn.green{background:#1D9E75;color:#fff;border-color:#1D9E75}.btn.green:hover{background:#0F6E56}.btn.blue{background:#185FA5;color:#fff;border-color:#185FA5}.btn.blue:hover{background:#0C447C}.btn.google{background:#fff;color:#444;border:1px solid #ddd;display:flex;align-items:center;gap:6px}.btn.red{background:#A32D2D;color:#fff;border-color:#A32D2D}.nav{display:flex;align-items:center;gap:6px}.nav button{font-size:16px;padding:4px 10px;border:1px solid #d9dde3;border-radius:8px;background:#fff;cursor:pointer}.month-label{font-size:15px;font-weight:700;min-width:100px;text-align:center}.status-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:1rem;background:#f6f7f9;color:#555}.status-dot{width:8px;height:8px;border-radius:50%;background:#888;flex-shrink:0}.status-dot.connected{background:#1D9E75}.status-dot.loading{background:#EF9F27;animation:pulse 1s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem}.stat-card{background:#f6f7f9;border-radius:8px;padding:8px 10px;text-align:center}.stat-name{font-size:11px;margin-bottom:3px}.stat-num{font-size:18px;font-weight:700}.stat-sub{font-size:10px;color:#888}.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:.75rem;align-items:center}.leg-item{display:flex;align-items:center;gap:4px;font-size:11px;color:#555}.leg-dot{width:9px;height:9px;border-radius:2px}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid #d9dde3;border-radius:12px;overflow:hidden}.day-header{background:#f6f7f9;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;color:#555;border-bottom:1px solid #e7e9ee}.day-header:first-child{color:#E24B4A}.day-header:last-child{color:#378ADD}.cell{min-height:86px;border-right:1px solid #e7e9ee;border-bottom:1px solid #e7e9ee;padding:4px;background:#fff;cursor:pointer;transition:background .1s}.cell:hover{background:#f6f7f9}.cell.empty{background:#f1f2f4;cursor:default}.cell.today .dnum{background:#1D9E75;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center}.dnum{font-size:11px;font-weight:700;color:#222;margin-bottom:2px;display:inline-flex}.sun .dnum{color:#E24B4A}.sat .dnum{color:#378ADD}.tag{
-  font-size:13px;
-  font-weight:700;
-  padding:4px 6px;
-  border-radius:4px;
-  margin-bottom:4px;
-  display:block;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  line-height:1.5;
-}.t-holiday{background:#FCEBEB;color:#A32D2D}.t-leave{background:#FAEEDA;color:#854F0B}.t-gcal{background:#EEEDFE;color:#3C3489}.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;z-index:100}.modal{background:#fff!important;color:#222!important;border-radius:14px;padding:1.25rem;width:340px;max-width:95vw;border:1px solid #cfd4dc;box-shadow:0 14px 40px rgba(0,0,0,.24)}.modal h3{font-size:15px;font-weight:700;margin-bottom:.75rem;color:#222}.modal label{font-size:12px;color:#333;display:block;margin-bottom:4px;font-weight:600}.modal input,.modal select{width:100%;margin-bottom:10px;font-size:13px;padding:8px 10px;border:1px solid #bfc6d1;border-radius:8px;background:#fff!important;color:#222!important}.modal-btns{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.elist{margin-top:6px;max-height:230px;overflow-y:auto}.erow{display:flex;align-items:center;gap:5px;font-size:11px;padding:6px 0;border-bottom:1px solid #e7e9ee}.erow:last-child{border:none}.mini-btn{font-size:10px;border:1px solid #ccd2dc;background:#fff;border-radius:6px;padding:3px 6px;cursor:pointer;flex-shrink:0}.mini-btn:hover{background:#f6f7f9}.del{font-size:10px;color:#A32D2D;background:#fff;border:1px solid #f1caca;border-radius:6px;cursor:pointer;padding:3px 6px;flex-shrink:0}.gcal-badge{font-size:9px;background:#EEEDFE;color:#3C3489;padding:2px 4px;border-radius:3px;flex-shrink:0}.auth-screen{position:fixed;inset:0;background:linear-gradient(135deg,#f6fbff,#fff7f8);display:flex;align-items:center;justify-content:center;z-index:999}.auth-box{background:#fff;border:1px solid #e5e7eb;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.12);padding:28px;width:340px;text-align:center}.auth-box h1{font-size:20px;margin-bottom:10px}.auth-box p{font-size:13px;color:#666;margin-bottom:18px}.auth-box input{width:100%;padding:10px;border:1px solid #ccd2dc;border-radius:10px;margin-bottom:10px}.auth-box button{width:100%;padding:10px;border:0;border-radius:10px;background:#1D9E75;color:#fff;font-weight:700;cursor:pointer}.auth-error{font-size:12px;color:#A32D2D;margin-top:8px;min-height:16px}
-@media print{
-  *{
-    -webkit-print-color-adjust:exact!important;
-    print-color-adjust:exact!important;
-  }
-
-  body{
-    background:#fff;
-  }
-
-  .status-bar,
-  .auth-screen{
-    display:none!important;
-  }
-
-  .top-bar{
-    display:flex!important;
-    justify-content:center!important;
-    margin-bottom:10px!important;
-  }
-
-  .top-bar .btn,
-  .top-bar .nav button,
-  #gcal-btn-wrap{
-    display:none!important;
-  }
-
-  .month-label{
-    display:block!important;
-    font-size:26px!important;
-    font-weight:800!important;
-    color:#111!important;
-    min-width:auto!important;
-  }
-
-  .wrap{
-    padding:0;
-    max-width:none;
-  }
-
-  .stats-bar{
-    grid-template-columns:repeat(4,1fr);
-    gap:4px;
-    margin-bottom:8px;
-  }
-
-  .stat-card{
-    padding:5px;
-    border:1px solid #ddd;
-    background:#fff!important;
-  }
-
-  .legend{
-    margin-bottom:8px;
-  }
-
-  .cal-grid{
-    border-radius:0;
-    border:1px solid #333;
-  }
-
-  .cell{
-    min-height:120px!important;
-    padding:5px!important;
-    break-inside:avoid;
-  }
-
-  .day-header{
-    border-color:#333;
-    background:#eee!important;
-    color:#111!important;
-    font-size:13px!important;
-    font-weight:700!important;
-  }
-
-  .cell,
-  .day-header{
-    border-right:1px solid #aaa;
-    border-bottom:1px solid #aaa;
-  }
-
-  .dnum{
-    font-size:13px!important;
-    font-weight:700!important;
-  }
-
-  .tag{
-    font-size:13px!important;
-    font-weight:700!important;
-    padding:4px 5px!important;
-    margin-bottom:4px!important;
-    line-height:1.35!important;
-    white-space:normal!important;
-    overflow:visible!important;
-    text-overflow:clip!important;
-  }
-
-  .t-gcal{
-    display:none!important;
-  }
-  
-  @page{
-    size:A4 landscape;
-    margin:10mm;
-  }
-}
+body{font-family:Arial,'Noto Sans KR',sans-serif;background:#fff;color:#222}.wrap{padding:1rem;max-width:1100px;margin:0 auto}.top-bar{display:flex;align-items:center;gap:8px;margin-bottom:1rem;flex-wrap:wrap}.btn{font-size:12px;padding:6px 12px;border:1px solid #d9dde3;border-radius:8px;background:#fff;color:#222;cursor:pointer;white-space:nowrap}.btn:hover{background:#f6f7f9}.btn.green{background:#1D9E75;color:#fff;border-color:#1D9E75}.btn.green:hover{background:#0F6E56}.btn.blue{background:#185FA5;color:#fff;border-color:#185FA5}.btn.blue:hover{background:#0C447C}.btn.google{background:#fff;color:#444;border:1px solid #ddd;display:flex;align-items:center;gap:6px}.btn.red{background:#A32D2D;color:#fff;border-color:#A32D2D}.nav{display:flex;align-items:center;gap:6px}.nav button{font-size:16px;padding:4px 10px;border:1px solid #d9dde3;border-radius:8px;background:#fff;cursor:pointer}.month-label{font-size:15px;font-weight:700;min-width:100px;text-align:center}.status-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:1rem;background:#f6f7f9;color:#555}.status-dot{width:8px;height:8px;border-radius:50%;background:#888;flex-shrink:0}.status-dot.connected{background:#1D9E75}.status-dot.loading{background:#EF9F27;animation:pulse 1s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem}.stat-card{background:#f6f7f9;border-radius:8px;padding:8px 10px;text-align:center}.stat-name{font-size:11px;margin-bottom:3px}.stat-num{font-size:18px;font-weight:700}.stat-sub{font-size:10px;color:#888}.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:.75rem;align-items:center}.leg-item{display:flex;align-items:center;gap:4px;font-size:11px;color:#555}.leg-dot{width:9px;height:9px;border-radius:2px}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid #d9dde3;border-radius:12px;overflow:hidden}.day-header{background:#f6f7f9;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;color:#555;border-bottom:1px solid #e7e9ee}.day-header:first-child{color:#E24B4A}.day-header:last-child{color:#378ADD}.cell{min-height:86px;border-right:1px solid #e7e9ee;border-bottom:1px solid #e7e9ee;padding:4px;background:#fff;cursor:pointer;transition:background .1s}.cell:hover{background:#f6f7f9}.cell.empty{background:#f1f2f4;cursor:default}.cell.today .dnum{background:#1D9E75;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center}.dnum{font-size:11px;font-weight:700;color:#222;margin-bottom:2px;display:inline-flex}.sun .dnum{color:#E24B4A}.sat .dnum{color:#378ADD}.tag{font-size:13px;font-weight:700;padding:4px 6px;border-radius:4px;margin-bottom:4px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5}.t-holiday{background:#FCEBEB;color:#A32D2D}.t-leave{background:#FAEEDA;color:#854F0B}.t-gcal{background:#EEEDFE;color:#3C3489}.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;z-index:100}.modal{background:#fff!important;color:#222!important;border-radius:14px;padding:1.25rem;width:340px;max-width:95vw;border:1px solid #cfd4dc;box-shadow:0 14px 40px rgba(0,0,0,.24)}.modal h3{font-size:15px;font-weight:700;margin-bottom:.75rem;color:#222}.modal label{font-size:12px;color:#333;display:block;margin-bottom:4px;font-weight:600}.modal input,.modal select{width:100%;margin-bottom:10px;font-size:13px;padding:8px 10px;border:1px solid #bfc6d1;border-radius:8px;background:#fff!important;color:#222!important}.modal-btns{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.elist{margin-top:6px;max-height:230px;overflow-y:auto}.erow{display:flex;align-items:center;gap:5px;font-size:11px;padding:6px 0;border-bottom:1px solid #e7e9ee}.erow:last-child{border:none}.mini-btn{font-size:10px;border:1px solid #ccd2dc;background:#fff;border-radius:6px;padding:3px 6px;cursor:pointer;flex-shrink:0}.mini-btn:hover{background:#f6f7f9}.del{font-size:10px;color:#A32D2D;background:#fff;border:1px solid #f1caca;border-radius:6px;cursor:pointer;padding:3px 6px;flex-shrink:0}.gcal-badge{font-size:9px;background:#EEEDFE;color:#3C3489;padding:2px 4px;border-radius:3px;flex-shrink:0}.auth-screen{position:fixed;inset:0;background:linear-gradient(135deg,#f6fbff,#fff7f8);display:flex;align-items:center;justify-content:center;z-index:999}.auth-box{background:#fff;border:1px solid #e5e7eb;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.12);padding:28px;width:340px;text-align:center}.auth-box h1{font-size:20px;margin-bottom:10px}.auth-box p{font-size:13px;color:#666;margin-bottom:18px}.auth-box input{width:100%;padding:10px;border:1px solid #ccd2dc;border-radius:10px;margin-bottom:10px}.auth-box button{width:100%;padding:10px;border:0;border-radius:10px;background:#1D9E75;color:#fff;font-weight:700;cursor:pointer}.auth-error{font-size:12px;color:#A32D2D;margin-top:8px;min-height:16px}
+/* JSON 가져오기 확인 모달 */
+.json-confirm-box{background:#fff;border-radius:14px;padding:1.25rem;width:360px;max-width:95vw;border:1px solid #cfd4dc;box-shadow:0 14px 40px rgba(0,0,0,.24)}.json-confirm-box h3{font-size:15px;font-weight:700;margin-bottom:.5rem}.json-confirm-box p{font-size:13px;color:#555;margin-bottom:1rem;line-height:1.5}
+@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body{background:#fff}.status-bar,.auth-screen,.legend{display:none!important}.top-bar{display:flex!important;justify-content:center!important;margin-bottom:10px!important}.top-bar .btn,.top-bar .nav button,#gcal-btn-wrap,#start-teacher{display:none!important}.month-label{display:block!important;font-size:26px!important;font-weight:800!important;color:#111!important;min-width:auto!important}.wrap{padding:0;max-width:none}.stats-bar{grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:8px}.stat-card{padding:5px;border:1px solid #ddd;background:#fff!important}.cal-grid{border-radius:0;border:1px solid #333}.cell{min-height:120px!important;padding:5px!important;break-inside:avoid}.day-header{border-color:#333;background:#eee!important;color:#111!important;font-size:13px!important;font-weight:700!important}.cell,.day-header{border-right:1px solid #aaa;border-bottom:1px solid #aaa}.dnum{font-size:13px!important;font-weight:700!important}.tag{font-size:13px!important;font-weight:700!important;padding:4px 5px!important;margin-bottom:4px!important;line-height:1.35!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important}.t-gcal{display:none!important}@page{size:A4 landscape;margin:10mm}}
 </style>
 </head>
 <body>
 <div class="auth-screen" id="auth-screen"><div class="auth-box"><h1>마루 당직·휴가 캘린더</h1><p>비밀번호를 입력해 주세요.</p><input type="password" id="auth-pass" placeholder="비밀번호"><button onclick="checkPassword()">들어가기</button><div class="auth-error" id="auth-error"></div></div></div>
+
 <div class="wrap" id="app-wrap" style="display:none">
 <div class="top-bar">
   <div class="nav">
@@ -136,27 +23,48 @@ body{font-family:Arial,'Noto Sans KR',sans-serif;background:#fff;color:#222}.wra
     <span class="month-label" id="mlabel"></span>
     <button onclick="changeMonth(1)">›</button>
   </div>
-
   <div id="gcal-btn-wrap">
     <button class="btn google" id="gcal-btn" onclick="handleGcalBtn()">📅 구글 캘린더 연동</button>
   </div>
-
   <select id="start-teacher" style="padding:10px 14px;border-radius:10px;border:1px solid #ccc;font-weight:600;background:white;color:#111;">
     <option value="0">김진경 T부터</option>
     <option value="1">장현주 T부터</option>
     <option value="2">박정노 T부터</option>
     <option value="3">장연옥 T부터</option>
   </select>
-
   <button class="btn green" onclick="autoAssign()">⟳ 당직 자동배정</button>
   <button class="btn blue" onclick="exportExcel()">↓ 엑셀 저장</button>
+  <button class="btn" style="background:#F0F7FF;color:#185FA5;border-color:#185FA5;" onclick="exportJSON()">📥 JSON 내보내기</button>
+  <button class="btn" style="background:#F0FFF7;color:#1D9E75;border-color:#1D9E75;" onclick="importJSONClick()">📂 JSON 불러오기</button>
+  <input type="file" id="json-file-input" accept=".json" style="display:none" onchange="importJSON(event)">
   <button class="btn" onclick="window.print()">🖨 인쇄</button>
   <button class="btn" onclick="openAdd()">+ 추가</button>
 </div>
 <div class="status-bar"><div class="status-dot" id="status-dot"></div><span id="status-text">구글 캘린더 연동 전입니다. 위 버튼을 눌러 연동해 주세요.</span></div>
-<div class="stats-bar" id="stats-bar"></div><div class="legend"><div class="leg-item"><div class="leg-dot" style="background:#fff;border:1px solid #185FA5"></div>당직</div><div class="leg-item"><div class="leg-dot" style="background:#C0DD97"></div>행사·교육</div><div class="leg-item"><div class="leg-dot" style="background:#F7C1C1"></div>공휴일</div><div class="leg-item"><div class="leg-dot" style="background:#FAC775"></div>휴가</div><div class="leg-item"><div class="leg-dot" style="background:#CECBF6"></div>구글 원본</div></div><div class="cal-grid" id="cal"></div></div>
+<div class="stats-bar" id="stats-bar"></div>
+<div class="legend"><div class="leg-item"><div class="leg-dot" style="background:#fff;border:1px solid #185FA5"></div>당직</div><div class="leg-item"><div class="leg-dot" style="background:#C0DD97"></div>행사·교육</div><div class="leg-item"><div class="leg-dot" style="background:#F7C1C1"></div>공휴일</div><div class="leg-item"><div class="leg-dot" style="background:#FAC775"></div>휴가</div><div class="leg-item"><div class="leg-dot" style="background:#CECBF6"></div>구글 원본</div></div>
+<div class="cal-grid" id="cal"></div>
+</div>
+
+<!-- 일정 추가/수정 모달 -->
 <div class="modal-bg" id="add-modal" style="display:none"><div class="modal"><h3 id="add-title">일정 추가</h3><label>날짜</label><input type="date" id="inp-date"><label>종류</label><select id="inp-type"><option value="duty">당직</option><option value="event">행사·교육</option><option value="holiday">공휴일</option><option value="leave">휴가</option></select><label>내용</label><input type="text" id="inp-text" placeholder="예: 김진경 T, 어린이날, 안전교육"><div class="modal-btns"><button class="btn" onclick="closeAdd()">취소</button><button class="btn green" onclick="saveEntry()" id="save-btn">저장</button></div></div></div>
+
+<!-- 날짜 상세 모달 -->
 <div class="modal-bg" id="detail-modal" style="display:none"><div class="modal"><h3 id="dtitle"></h3><div class="elist" id="elist"></div><div class="modal-btns" style="margin-top:10px"><button class="btn" onclick="closeDetail()">닫기</button><button class="btn green" onclick="addFromDetail()">+ 추가</button></div></div></div>
+
+<!-- JSON 가져오기 확인 모달 -->
+<div class="modal-bg" id="json-confirm-modal" style="display:none">
+  <div class="json-confirm-box">
+    <h3>📂 JSON 불러오기</h3>
+    <p id="json-confirm-msg"></p>
+    <div class="modal-btns">
+      <button class="btn" onclick="closeJsonConfirm()">취소</button>
+      <button class="btn" style="background:#EF9F27;color:#fff;border-color:#EF9F27;" onclick="confirmMerge()">기존 일정 유지 후 추가</button>
+      <button class="btn red" onclick="confirmReplace()">전체 교체</button>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const APP_PASSWORD='maru2026';
@@ -164,73 +72,155 @@ const CLIENT_ID='682075457599-5p3hujotoftlcbk629b8t3mmqbmrfu0k.apps.googleuserco
 const SCOPES='https://www.googleapis.com/auth/calendar.readonly';
 const TEACHERS=['김진경 T','장현주 T','박정노 T','장연옥 T'];
 const TC=['#185FA5','#3B6D11','#854F0B','#D94F70'];
-const DAYS=['일','월','화','수','목','금','토']; const MKR=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+const DAYS=['일','월','화','수','목','금','토'];
+const MKR=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+
 let cur=new Date(2026,4,1), selDate=null, editKey=null, editIndex=null, gapiReady=false, gisReady=false, tokenClient=null, isSignedIn=false;
 let data={'2026-05-05':[{type:'holiday',text:'어린이날'}],'2026-05-08':[{type:'event',text:'어버이날'}],'2026-05-15':[{type:'event',text:'스승의날'}],'2026-05-25':[{type:'holiday',text:'대체공휴일'}]};
 let hiddenGcal={};
-function checkPassword(){const v=document.getElementById('auth-pass').value;if(v===APP_PASSWORD){document.getElementById('auth-screen').style.display='none';document.getElementById('app-wrap').style.display='block';render()}else document.getElementById('auth-error').textContent='비밀번호가 맞지 않습니다.'}document.getElementById('auth-pass').addEventListener('keydown',e=>{if(e.key==='Enter')checkPassword()});
-function key(y,m,d){return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`} function todayKey(){let t=new Date();return key(t.getFullYear(),t.getMonth(),t.getDate())} function isHoliday(k){return (data[k]||[]).some(e=>e.type==='holiday')} function gcalId(ev){return (ev.id||'')+'|'+(ev.summary||'')+'|'+((ev.start&&(ev.start.date||ev.start.dateTime))||'')}
+
+// JSON 가져오기용 임시 저장
+let _pendingImportData = null;
+
+function checkPassword(){const v=document.getElementById('auth-pass').value;if(v===APP_PASSWORD){document.getElementById('auth-screen').style.display='none';document.getElementById('app-wrap').style.display='block';render()}else document.getElementById('auth-error').textContent='비밀번호가 맞지 않습니다.'}
+document.getElementById('auth-pass').addEventListener('keydown',e=>{if(e.key==='Enter')checkPassword()});
+
+function key(y,m,d){return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
+function todayKey(){let t=new Date();return key(t.getFullYear(),t.getMonth(),t.getDate())}
+function isHoliday(k){return (data[k]||[]).some(e=>e.type==='holiday')}
+function gcalId(ev){return (ev.id||'')+'|'+(ev.summary||'')+'|'+((ev.start&&(ev.start.date||ev.start.dateTime))||'')}
 function kstDateFromDateTime(s){const d=new Date(s);const k=new Date(d.getTime()+9*60*60*1000);return k.toISOString().substring(0,10)}
 function monthRangeKst(){const y=cur.getFullYear(),m=cur.getMonth();return {timeMin:`${y}-${String(m+1).padStart(2,'0')}-01T00:00:00+09:00`,timeMax:`${y}-${String(m+2).padStart(2,'0')}-01T00:00:00+09:00`}}
+
+// ───── JSON 내보내기 ─────
+function exportJSON(){
+  // gcal 타입(구글 원본)은 제외하고 저장
+  const exportData = {};
+  Object.keys(data).forEach(k => {
+    const filtered = data[k].filter(e => e.type !== 'gcal');
+    if(filtered.length) exportData[k] = filtered;
+  });
+  const payload = {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    data: exportData
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const now = new Date();
+  a.download = `당직표_${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  setStatus('JSON 파일로 내보내기 완료!', isSignedIn);
+}
+
+// ───── JSON 불러오기 ─────
+function importJSONClick(){
+  document.getElementById('json-file-input').value = '';
+  document.getElementById('json-file-input').click();
+}
+
+function importJSON(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      // 유효성 검사
+      if(!parsed.data || typeof parsed.data !== 'object') throw new Error('올바른 형식이 아닙니다.');
+      _pendingImportData = parsed.data;
+      const totalDays = Object.keys(parsed.data).length;
+      const totalEntries = Object.values(parsed.data).reduce((s,v)=>s+v.length,0);
+      const exportedAt = parsed.exportedAt ? new Date(parsed.exportedAt).toLocaleString('ko-KR') : '알 수 없음';
+      document.getElementById('json-confirm-msg').innerHTML =
+        `<b>파일:</b> ${file.name}<br><b>저장일시:</b> ${exportedAt}<br><b>일정 수:</b> ${totalDays}일, 총 ${totalEntries}개<br><br>기존 일정을 유지하면서 추가하거나, 전체 교체할 수 있어요.`;
+      document.getElementById('json-confirm-modal').style.display = 'flex';
+    } catch(err) {
+      alert('JSON 파일을 읽을 수 없습니다: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function closeJsonConfirm(){
+  document.getElementById('json-confirm-modal').style.display = 'none';
+  _pendingImportData = null;
+}
+
+function confirmReplace(){
+  if(!_pendingImportData) return;
+  // gcal 항목은 유지
+  const gcalEntries = {};
+  Object.keys(data).forEach(k => {
+    const gcals = data[k].filter(e => e.type === 'gcal');
+    if(gcals.length) gcalEntries[k] = gcals;
+  });
+  data = {..._pendingImportData};
+  // gcal 항목 다시 병합
+  Object.keys(gcalEntries).forEach(k => {
+    if(!data[k]) data[k] = [];
+    data[k] = data[k].concat(gcalEntries[k]);
+  });
+  closeJsonConfirm();
+  render();
+  setStatus('JSON 파일로 전체 교체 완료!', isSignedIn);
+}
+
+function confirmMerge(){
+  if(!_pendingImportData) return;
+  Object.keys(_pendingImportData).forEach(k => {
+    if(!data[k]) data[k] = [];
+    _pendingImportData[k].forEach(newEntry => {
+      // 중복 방지: 같은 type+text 조합이 이미 있으면 추가 안 함
+      const dup = data[k].some(e => e.type === newEntry.type && e.text === newEntry.text);
+      if(!dup) data[k].push(newEntry);
+    });
+  });
+  closeJsonConfirm();
+  render();
+  setStatus('JSON 파일 병합 완료!', isSignedIn);
+}
+
+// ───── 구글 캘린더 ─────
 function loadGapiScript(){return new Promise(res=>{if(window.gapi){res();return}const s=document.createElement('script');s.src='https://apis.google.com/js/api.js';s.onload=()=>{gapi.load('client',async()=>{await gapi.client.init({});await gapi.client.load('https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest');gapiReady=true;res()})};document.head.appendChild(s)})}
 function loadGisScript(){return new Promise(res=>{if(window.google&&google.accounts){gisReady=true;res();return}const s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.onload=()=>{tokenClient=google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:SCOPES,callback:async(resp)=>{if(resp.error){setStatus('연동 실패: '+resp.error,false);return}isSignedIn=true;setStatus('구글 캘린더 연동됨',true);document.getElementById('gcal-btn').textContent='✓ 다시 불러오기';document.getElementById('gcal-btn').onclick=fetchGcalEvents;await fetchGcalEvents()}});gisReady=true;res()};document.head.appendChild(s)})}
 async function handleGcalBtn(){setStatus('구글 로그인 준비 중...',false,true);if(!gapiReady||!gisReady)await Promise.all([loadGapiScript(),loadGisScript()]);tokenClient.requestAccessToken({prompt:'consent'})}
 function setStatus(msg,connected,loading){const dot=document.getElementById('status-dot');dot.className='status-dot'+(connected?' connected':loading?' loading':'');document.getElementById('status-text').textContent=msg}
 async function fetchGcalEvents(){if(!isSignedIn){handleGcalBtn();return}setStatus('구글 캘린더 불러오는 중...',false,true);const {timeMin,timeMax}=monthRangeKst();try{const resp=await gapi.client.calendar.events.list({calendarId:'primary',timeMin,timeMax,timeZone:'Asia/Seoul',singleEvents:true,orderBy:'startTime',maxResults:100});Object.keys(data).forEach(k=>{data[k]=data[k].filter(e=>e.type!=='gcal');if(!data[k].length)delete data[k]});let count=0;(resp.result.items||[]).forEach(ev=>{const start=ev.start.date||ev.start.dateTime;if(!start)return;const d=ev.start.date?ev.start.date:kstDateFromDateTime(ev.start.dateTime);const id=gcalId(ev);if(hiddenGcal[id])return;if(!data[d])data[d]=[];data[d].push({type:'gcal',text:ev.summary||'(제목 없음)',gcalId:id});count++});setStatus(`구글 캘린더 연동됨 · 이번 달 원본 일정 ${count}개 표시`,true);render()}catch(e){setStatus('불러오기 실패: '+e.message,false)}}
+
 function autoAssign(){
-  const y = cur.getFullYear();
-  const m = cur.getMonth();
-  const last = new Date(y, m+1, 0).getDate();
+  const y=cur.getFullYear(),m=cur.getMonth(),last=new Date(y,m+1,0).getDate();
+  for(let d=1;d<=last;d++){const k=key(y,m,d);if(data[k])data[k]=data[k].filter(e=>e.type!=='duty')}
+  let idx=Number(document.getElementById('start-teacher').value||0);
+  for(let d=1;d<=last;d++){const k=key(y,m,d),dow=new Date(y,m,d).getDay();if(dow===0||dow===6||isHoliday(k))continue;if(!data[k])data[k]=[];data[k].push({type:'duty',text:TEACHERS[idx%TEACHERS.length]});idx++}
+  render();setStatus(isSignedIn?'구글 캘린더 연동됨 · 당직 자동배정 완료!':'당직 자동배정 완료! 구글 캘린더도 연동해보세요.',isSignedIn)
+}
 
-  // 기존 당직 삭제
-  for(let d=1; d<=last; d++){
-    const k = key(y,m,d);
-
-    if(data[k]){
-      data[k] = data[k].filter(e => e.type !== 'duty');
-    }
-  }
-
-// 선택한 선생님부터 시작
-let idx = Number(document.getElementById('start-teacher').value || 0);
-
-  // 당직 자동 배정
-  for(let d=1; d<=last; d++){
-    const k = key(y,m,d);
-    const dow = new Date(y,m,d).getDay();
-
-    // 주말 및 공휴일 제외
-    if(dow===0 || dow===6 || isHoliday(k)) continue;
-
-    if(!data[k]) data[k] = [];
-
-    data[k].push({
-      type:'duty',
-      text:TEACHERS[idx % TEACHERS.length]
-    });
-
-    idx++;
-  }
-
-  render();
-
-  setStatus(
-    isSignedIn
-      ? '구글 캘린더 연동됨 · 당직 자동배정 완료!'
-      : '당직 자동배정 완료! 구글 캘린더도 연동해보세요.',
-    isSignedIn
-  )}
 function render(){const y=cur.getFullYear(),m=cur.getMonth();document.getElementById('mlabel').textContent=`${y}년 ${MKR[m]}`;const cal=document.getElementById('cal');cal.innerHTML=DAYS.map(d=>`<div class="day-header">${d}</div>`).join('');const first=new Date(y,m,1).getDay(),last=new Date(y,m+1,0).getDate(),td=todayKey();for(let i=0;i<first;i++)cal.innerHTML+='<div class="cell empty"></div>';for(let d=1;d<=last;d++){const k=key(y,m,d),dow=new Date(y,m,d).getDay(),cls=(dow===0?' sun':dow===6?' sat':''),entries=data[k]||[];let tags=entries.slice(0,4).map(e=>{if(e.type==='duty'){const ti=TEACHERS.indexOf(e.text);const co=ti>=0?TC[ti]:'#185FA5';return `<span class="tag" style="background:#fff;color:${co};border:1px solid ${co}">${e.text}</span>`}return `<span class="tag t-${e.type}">${e.text}</span>`}).join('');if(entries.length>4)tags+=`<span style="font-size:9px;color:#888">+${entries.length-4}</span>`;cal.innerHTML+=`<div class="cell${cls}${k===td?' today':''}" onclick="openDetail('${k}',${d})"><div class="dnum">${d}</div>${tags}</div>`}const rem=(7-(first+last)%7)%7;for(let i=0;i<rem;i++)cal.innerHTML+='<div class="cell empty"></div>';renderStats()}
+
 function renderStats(){const y=cur.getFullYear(),m=cur.getMonth(),last=new Date(y,m+1,0).getDate(),counts=TEACHERS.map(()=>0);for(let d=1;d<=last;d++){(data[key(y,m,d)]||[]).forEach(e=>{if(e.type==='duty'){const i=TEACHERS.indexOf(e.text);if(i>=0)counts[i]++}})}document.getElementById('stats-bar').innerHTML=TEACHERS.map((t,i)=>`<div class="stat-card"><div class="stat-name" style="color:${TC[i]}">${t}</div><div class="stat-num">${counts[i]}</div><div class="stat-sub">당직 횟수</div></div>`).join('')}
+
 function changeMonth(d){cur.setMonth(cur.getMonth()+d);render();if(isSignedIn)fetchGcalEvents()}
-function openAdd(pre,type,text){editKey=null;editIndex=null;document.getElementById('add-title').textContent='일정 추가';document.getElementById('save-btn').textContent='저장';document.getElementById('inp-date').value=pre||'';document.getElementById('inp-type').value=type||'duty';document.getElementById('inp-text').value=text||'';document.getElementById('add-modal').style.display='flex'}function closeAdd(){document.getElementById('add-modal').style.display='none'}
+
+function openAdd(pre,type,text){editKey=null;editIndex=null;document.getElementById('add-title').textContent='일정 추가';document.getElementById('save-btn').textContent='저장';document.getElementById('inp-date').value=pre||'';document.getElementById('inp-type').value=type||'duty';document.getElementById('inp-text').value=text||'';document.getElementById('add-modal').style.display='flex'}
+function closeAdd(){document.getElementById('add-modal').style.display='none'}
+
 function saveEntry(){const d=document.getElementById('inp-date').value,t=document.getElementById('inp-type').value,tx=document.getElementById('inp-text').value.trim();if(!d||!tx){alert('날짜와 내용을 입력해주세요');return}if(editKey!==null){const item=data[editKey][editIndex];if(editKey!==d){data[editKey].splice(editIndex,1);if(!data[editKey].length)delete data[editKey];if(!data[d])data[d]=[];data[d].push({type:t,text:tx})}else{item.type=t;item.text=tx}}else{if(!data[d])data[d]=[];data[d].push({type:t,text:tx})}closeAdd();render();if(selDate)renderElist(selDate)}
+
 function openDetail(k,d){selDate=k;const pts=k.split('-');document.getElementById('dtitle').textContent=`${pts[0]}년 ${parseInt(pts[1])}월 ${d}일`;renderElist(k);document.getElementById('detail-modal').style.display='flex'}
+
 function renderElist(k){const entries=data[k]||[],lbl={duty:'당직',event:'행사',holiday:'공휴일',leave:'휴가',gcal:'구글원본'};if(!entries.length){document.getElementById('elist').innerHTML='<p style="font-size:12px;color:#555;padding:8px 0">등록된 일정이 없습니다.</p>';return}document.getElementById('elist').innerHTML=entries.map((e,i)=>{const ti=e.type==='duty'?TEACHERS.indexOf(e.text):-1;const co=ti>=0?TC[ti]:e.type==='event'?'#3B6D11':e.type==='holiday'?'#A32D2D':e.type==='gcal'?'#3C3489':'#854F0B';const bg=e.type==='duty'?'#fff':e.type==='event'?'#EAF3DE':e.type==='holiday'?'#FCEBEB':e.type==='gcal'?'#EEEDFE':'#FAEEDA';let buttons='';if(e.type==='gcal'){buttons=`<button class="mini-btn" onclick="copyGcal('${k}',${i})">복사</button><button class="del" onclick="hideGcal('${k}',${i})">표에서 삭제</button>`}else{buttons=`<button class="mini-btn" onclick="editEntry('${k}',${i})">수정</button><button class="del" onclick="delEntry('${k}',${i})">삭제</button>`}return `<div class="erow"><span class="tag" style="background:${bg};color:${co};border:${e.type==='duty'?'1px solid '+co:'none'};margin:0;flex-shrink:0">${lbl[e.type]}</span><span style="flex:1;color:#222;font-size:12px;padding:0 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.text}</span>${buttons}</div>`}).join('')}
+
 function copyGcal(k,i){const e=data[k][i];data[k].push({type:'event',text:e.text});if(e.gcalId)hiddenGcal[e.gcalId]=true;data[k].splice(i,1);if(!data[k].length)delete data[k];render();renderElist(k);setStatus('구글 원본을 행사 일정으로 복사하고 표에서는 숨겼습니다.',isSignedIn)}
 function hideGcal(k,i){const e=data[k][i];if(e.gcalId)hiddenGcal[e.gcalId]=true;data[k].splice(i,1);if(!data[k].length)delete data[k];render();renderElist(k);setStatus('구글 원본 일정을 현재 표에서 숨겼습니다. 구글 캘린더 원본은 삭제되지 않습니다.',isSignedIn)}
 function editEntry(k,i){const e=data[k][i];editKey=k;editIndex=i;document.getElementById('detail-modal').style.display='none';document.getElementById('add-title').textContent='일정 수정';document.getElementById('save-btn').textContent='수정 저장';document.getElementById('inp-date').value=k;document.getElementById('inp-type').value=e.type;document.getElementById('inp-text').value=e.text;document.getElementById('add-modal').style.display='flex'}
-function delEntry(k,i){data[k].splice(i,1);if(!data[k].length)delete data[k];render();renderElist(k)}function closeDetail(){document.getElementById('detail-modal').style.display='none'}function addFromDetail(){closeDetail();openAdd(selDate)}
+function delEntry(k,i){data[k].splice(i,1);if(!data[k].length)delete data[k];render();renderElist(k)}
+function closeDetail(){document.getElementById('detail-modal').style.display='none'}
+function addFromDetail(){closeDetail();openAdd(selDate)}
+
 function exportExcel(){const y=cur.getFullYear(),m=cur.getMonth(),last=new Date(y,m+1,0).getDate();const wsData=[[`${y}년 ${MKR[m]} 당직·행사표`],[],['일','월','화','수','목','금','토']];const first=new Date(y,m,1).getDay();let week=Array(7).fill(''),dutyW=Array(7).fill(''),evW=Array(7).fill('');for(let d=1;d<=last;d++){const dow=new Date(y,m,d).getDay(),k=key(y,m,d),entries=data[k]||[];week[dow]=d;dutyW[dow]=entries.filter(e=>e.type==='duty').map(e=>e.text).join(', ');evW[dow]=entries.filter(e=>e.type!=='duty'&&e.type!=='gcal').map(e=>e.text).join(', ');if(dow===6||d===last){wsData.push([...week]);wsData.push(dutyW.map(v=>v||''));wsData.push(evW.map(v=>v||''));wsData.push(Array(7).fill(''));week=Array(7).fill('');dutyW=Array(7).fill('');evW=Array(7).fill('')}}wsData.push([],[null,'선생님','당직 횟수']);const counts=TEACHERS.map(()=>0);for(let d=1;d<=last;d++){(data[key(y,m,d)]||[]).forEach(e=>{if(e.type==='duty'){const i=TEACHERS.indexOf(e.text);if(i>=0)counts[i]++}})}TEACHERS.forEach((t,i)=>wsData.push(['',t,counts[i]]));const wb=XLSX.utils.book_new(),ws=XLSX.utils.aoa_to_sheet(wsData);ws['!cols']=[{wch:5},{wch:14},{wch:14},{wch:14},{wch:14},{wch:14},{wch:5}];XLSX.utils.book_append_sheet(wb,ws,`${y}년 ${m+1}월`);XLSX.writeFile(wb,`당직표_${y}년_${m+1}월.xlsx`)}
 </script>
 </body>
