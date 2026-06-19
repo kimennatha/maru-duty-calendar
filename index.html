@@ -8,9 +8,10 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--color-background-primary:#fff;--color-background-secondary:#f6f7f9;--color-background-tertiary:#f1f2f4;--color-border-secondary:#d9dde3;--color-border-tertiary:#e7e9ee;--color-text-primary:#222;--color-text-secondary:#555;--color-text-tertiary:#888;--border-radius-md:8px;--border-radius-lg:12px}
 body{font-family:Arial,'Noto Sans KR',sans-serif;background:#fff;color:#222}.wrap{padding:1rem;max-width:1100px;margin:0 auto}.top-bar{display:flex;align-items:center;gap:8px;margin-bottom:1rem;flex-wrap:wrap}.btn{font-size:12px;padding:6px 12px;border:1px solid #d9dde3;border-radius:8px;background:#fff;color:#222;cursor:pointer;white-space:nowrap}.btn:hover{background:#f6f7f9}.btn.green{background:#1D9E75;color:#fff;border-color:#1D9E75}.btn.green:hover{background:#0F6E56}.btn.blue{background:#185FA5;color:#fff;border-color:#185FA5}.btn.blue:hover{background:#0C447C}.btn.google{background:#fff;color:#444;border:1px solid #ddd;display:flex;align-items:center;gap:6px}.btn.red{background:#A32D2D;color:#fff;border-color:#A32D2D}.nav{display:flex;align-items:center;gap:6px}.nav button{font-size:16px;padding:4px 10px;border:1px solid #d9dde3;border-radius:8px;background:#fff;cursor:pointer}.month-label{font-size:15px;font-weight:700;min-width:100px;text-align:center}.status-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:1rem;background:#f6f7f9;color:#555}.status-dot{width:8px;height:8px;border-radius:50%;background:#888;flex-shrink:0}.status-dot.connected{background:#1D9E75}.status-dot.loading{background:#EF9F27;animation:pulse 1s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem}.stat-card{background:#f6f7f9;border-radius:8px;padding:8px 10px;text-align:center}.stat-name{font-size:11px;margin-bottom:3px}.stat-num{font-size:18px;font-weight:700}.stat-sub{font-size:10px;color:#888}.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:.75rem;align-items:center}.leg-item{display:flex;align-items:center;gap:4px;font-size:11px;color:#555}.leg-dot{width:9px;height:9px;border-radius:2px}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid #d9dde3;border-radius:12px;overflow:hidden}.day-header{background:#f6f7f9;font-size:11px;font-weight:700;text-align:center;padding:6px 2px;color:#555;border-bottom:1px solid #e7e9ee}.day-header:first-child{color:#E24B4A}.day-header:last-child{color:#378ADD}.cell{min-height:86px;border-right:1px solid #e7e9ee;border-bottom:1px solid #e7e9ee;padding:4px;background:#fff;cursor:pointer;transition:background .1s}.cell:hover{background:#f6f7f9}.cell.empty{background:#f1f2f4;cursor:default}.cell.today .dnum{background:#1D9E75;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center}.dnum{font-size:11px;font-weight:700;color:#222;margin-bottom:2px;display:inline-flex}.sun .dnum{color:#E24B4A}.sat .dnum{color:#378ADD}.tag{font-size:13px;font-weight:700;padding:4px 6px;border-radius:4px;margin-bottom:4px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5}.t-holiday{background:#FCEBEB;color:#A32D2D}.t-leave{background:#FAEEDA;color:#854F0B}.t-gcal{background:#EEEDFE;color:#3C3489}.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;z-index:100}.modal{background:#fff!important;color:#222!important;border-radius:14px;padding:1.25rem;width:340px;max-width:95vw;border:1px solid #cfd4dc;box-shadow:0 14px 40px rgba(0,0,0,.24)}.modal h3{font-size:15px;font-weight:700;margin-bottom:.75rem;color:#222}.modal label{font-size:12px;color:#333;display:block;margin-bottom:4px;font-weight:600}.modal input,.modal select{width:100%;margin-bottom:10px;font-size:13px;padding:8px 10px;border:1px solid #bfc6d1;border-radius:8px;background:#fff!important;color:#222!important}.modal-btns{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.elist{margin-top:6px;max-height:230px;overflow-y:auto}.erow{display:flex;align-items:center;gap:5px;font-size:11px;padding:6px 0;border-bottom:1px solid #e7e9ee}.erow:last-child{border:none}.mini-btn{font-size:10px;border:1px solid #ccd2dc;background:#fff;border-radius:6px;padding:3px 6px;cursor:pointer;flex-shrink:0}.mini-btn:hover{background:#f6f7f9}.del{font-size:10px;color:#A32D2D;background:#fff;border:1px solid #f1caca;border-radius:6px;cursor:pointer;padding:3px 6px;flex-shrink:0}.gcal-badge{font-size:9px;background:#EEEDFE;color:#3C3489;padding:2px 4px;border-radius:3px;flex-shrink:0}.auth-screen{position:fixed;inset:0;background:linear-gradient(135deg,#f6fbff,#fff7f8);display:flex;align-items:center;justify-content:center;z-index:999}.auth-box{background:#fff;border:1px solid #e5e7eb;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.12);padding:28px;width:340px;text-align:center}.auth-box h1{font-size:20px;margin-bottom:10px}.auth-box p{font-size:13px;color:#666;margin-bottom:18px}.auth-box input{width:100%;padding:10px;border:1px solid #ccd2dc;border-radius:10px;margin-bottom:10px}.auth-box button{width:100%;padding:10px;border:0;border-radius:10px;background:#1D9E75;color:#fff;font-weight:700;cursor:pointer}.auth-error{font-size:12px;color:#A32D2D;margin-top:8px;min-height:16px}
+.duty-setting-panel{background:#fff;border:1px solid #d9dde3;border-radius:12px;padding:12px;margin-bottom:1rem}.duty-setting-title{font-size:13px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.duty-setting-title span{color:#555;font-weight:500;font-size:11px}.duty-setting-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.duty-setting-item label{font-size:11px;font-weight:700;color:#555;display:block;margin-bottom:4px}.duty-setting-item select{width:100%;font-size:12px;padding:7px 8px;border:1px solid #ccd2dc;border-radius:8px;background:#fff;color:#222}.duty-setting-actions{display:flex;gap:6px;margin-top:8px;justify-content:flex-end;flex-wrap:wrap}@media(max-width:760px){.duty-setting-grid{grid-template-columns:repeat(2,1fr)}}
 /* JSON 가져오기 확인 모달 */
 .json-confirm-box{background:#fff;border-radius:14px;padding:1.25rem;width:360px;max-width:95vw;border:1px solid #cfd4dc;box-shadow:0 14px 40px rgba(0,0,0,.24)}.json-confirm-box h3{font-size:15px;font-weight:700;margin-bottom:.5rem}.json-confirm-box p{font-size:13px;color:#555;margin-bottom:1rem;line-height:1.5}
-@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body{background:#fff}.status-bar,.auth-screen,.legend{display:none!important}.top-bar{display:flex!important;justify-content:center!important;margin-bottom:10px!important}.top-bar .btn,.top-bar .nav button,#gcal-btn-wrap,#start-teacher{display:none!important}.month-label{display:block!important;font-size:26px!important;font-weight:800!important;color:#111!important;min-width:auto!important}.wrap{padding:0;max-width:none}.stats-bar{grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:8px}.stat-card{padding:5px;border:1px solid #ddd;background:#fff!important}.cal-grid{border-radius:0;border:1px solid #333}.cell{min-height:120px!important;padding:5px!important;break-inside:avoid}.day-header{border-color:#333;background:#eee!important;color:#111!important;font-size:13px!important;font-weight:700!important}.cell,.day-header{border-right:1px solid #aaa;border-bottom:1px solid #aaa}.dnum{font-size:13px!important;font-weight:700!important}.tag{font-size:13px!important;font-weight:700!important;padding:4px 5px!important;margin-bottom:4px!important;line-height:1.35!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;display:block!important;width:100%!important;box-sizing:border-box!important}.tag[style*="border"]{font-size:17px!important;padding:6px 4px!important;text-align:center!important;letter-spacing:-0.5px!important}.t-gcal{display:none!important}@page{size:A4 landscape;margin:10mm}}
+@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body{background:#fff}.status-bar,.auth-screen,.legend,.duty-setting-panel{display:none!important}.top-bar{display:flex!important;justify-content:center!important;margin-bottom:10px!important}.top-bar .btn,.top-bar .nav button,#gcal-btn-wrap,#start-teacher{display:none!important}.month-label{display:block!important;font-size:26px!important;font-weight:800!important;color:#111!important;min-width:auto!important}.wrap{padding:0;max-width:none}.stats-bar{grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:8px}.stat-card{padding:5px;border:1px solid #ddd;background:#fff!important}.cal-grid{border-radius:0;border:1px solid #333}.cell{min-height:120px!important;padding:5px!important;break-inside:avoid}.day-header{border-color:#333;background:#eee!important;color:#111!important;font-size:13px!important;font-weight:700!important}.cell,.day-header{border-right:1px solid #aaa;border-bottom:1px solid #aaa}.dnum{font-size:13px!important;font-weight:700!important}.tag{font-size:13px!important;font-weight:700!important;padding:4px 5px!important;margin-bottom:4px!important;line-height:1.35!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;display:block!important;width:100%!important;box-sizing:border-box!important}.tag[style*="border"]{font-size:17px!important;padding:6px 4px!important;text-align:center!important;letter-spacing:-0.5px!important}.t-gcal{display:none!important}@page{size:A4 landscape;margin:10mm}}
 </style>
 </head>
 <body>
@@ -40,6 +41,17 @@ body{font-family:Arial,'Noto Sans KR',sans-serif;background:#fff;color:#222}.wra
   <button class="btn" style="background:#F3F0FF;color:#7B2FBE;border-color:#7B2FBE;" onclick="exportPPT()">📊 PPT 저장</button>
   <button class="btn" onclick="window.print()">🖨 인쇄</button>
   <button class="btn" onclick="openAdd()">+ 추가</button>
+</div>
+<div class="duty-setting-panel">
+  <div class="duty-setting-title">
+    <div>요일별 당직 설정</div>
+    <span id="duty-setting-help">현재 월 기준으로 저장됩니다.</span>
+  </div>
+  <div class="duty-setting-grid" id="duty-setting-grid"></div>
+  <div class="duty-setting-actions">
+    <button class="btn" onclick="resetDutySettingsForMonth()">기본값</button>
+    <button class="btn blue" onclick="saveDutySettingsForMonth()">이 달 설정 저장</button>
+  </div>
 </div>
 <div class="status-bar"><div class="status-dot" id="status-dot"></div><span id="status-text">구글 캘린더 연동 전입니다. 위 버튼을 눌러 연동해 주세요.</span></div>
 <div class="stats-bar" id="stats-bar"></div>
@@ -75,6 +87,9 @@ const SCOPES='https://www.googleapis.com/auth/calendar.readonly';
 const TEACHERS=['김진경 T','장현주 T','박정노 T','김혜민 T'];
 const TC=['#185FA5','#3B6D11','#854F0B','#D94F70'];
 const DAYS=['일','월','화','수','목','금','토'];
+const DUTY_SETTING_STORAGE_KEY='maruDutySettingsV1';
+const DEFAULT_DUTY_SETTING={1:'김진경 T',2:'장현주 T',3:'박정노 T',4:'rotate',5:'김혜민 T'};
+let monthlyDutySettings=loadDutySettings();
 const MKR=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
 
 let cur=new Date(2026,4,1), selDate=null, editKey=null, editIndex=null, gapiReady=false, gisReady=false, tokenClient=null, isSignedIn=false;
@@ -83,6 +98,18 @@ let hiddenGcal={};
 
 // JSON 가져오기용 임시 저장
 let _pendingImportData = null;
+let _pendingImportSettings = null;
+
+function monthSettingKey(y,m){return `${y}-${String(m+1).padStart(2,'0')}`}
+function loadDutySettings(){try{return JSON.parse(localStorage.getItem(DUTY_SETTING_STORAGE_KEY)||'{}')}catch(e){return {}}}
+function persistDutySettings(){localStorage.setItem(DUTY_SETTING_STORAGE_KEY, JSON.stringify(monthlyDutySettings))}
+function getDutySettingForMonth(y,m){const mk=monthSettingKey(y,m);return {...DEFAULT_DUTY_SETTING,...(monthlyDutySettings[mk]||{})}}
+function buildDutySettingPanel(){const grid=document.getElementById('duty-setting-grid');if(!grid)return;const opts=['<option value="rotate">순차배정</option>'].concat(TEACHERS.map(t=>`<option value="${t}">${t}</option>`)).join('');grid.innerHTML=[1,2,3,4,5].map(dow=>`<div class="duty-setting-item"><label>${DAYS[dow]}요일</label><select id="duty-weekday-${dow}" onchange="previewDutySettingChanged()">${opts}</select></div>`).join('')}
+function syncDutySettingPanel(){buildDutySettingPanel();const y=cur.getFullYear(),m=cur.getMonth(),mk=monthSettingKey(y,m),setting=getDutySettingForMonth(y,m);[1,2,3,4,5].forEach(dow=>{const el=document.getElementById(`duty-weekday-${dow}`);if(el)el.value=setting[dow]||DEFAULT_DUTY_SETTING[dow]});const help=document.getElementById('duty-setting-help');if(help)help.textContent=`${mk} 설정 · 순차배정은 날짜순으로 돌아갑니다.`}
+function readDutySettingPanel(){const out={};[1,2,3,4,5].forEach(dow=>{const el=document.getElementById(`duty-weekday-${dow}`);out[dow]=el?el.value:DEFAULT_DUTY_SETTING[dow]});return out}
+function saveDutySettingsForMonth(){const y=cur.getFullYear(),m=cur.getMonth(),mk=monthSettingKey(y,m);monthlyDutySettings[mk]=readDutySettingPanel();persistDutySettings();setStatus(`${mk} 요일별 당직 설정 저장 완료!`,isSignedIn)}
+function resetDutySettingsForMonth(){const y=cur.getFullYear(),m=cur.getMonth(),mk=monthSettingKey(y,m);monthlyDutySettings[mk]={...DEFAULT_DUTY_SETTING};persistDutySettings();syncDutySettingPanel();setStatus(`${mk} 당직 설정을 기본값으로 되돌렸습니다.`,isSignedIn)}
+function previewDutySettingChanged(){const help=document.getElementById('duty-setting-help');if(help)help.textContent='변경 후 “이 달 설정 저장”을 눌러주세요.'}
 
 function checkPassword(){const v=document.getElementById('auth-pass').value;if(v===APP_PASSWORD){document.getElementById('auth-screen').style.display='none';document.getElementById('app-wrap').style.display='block';render()}else document.getElementById('auth-error').textContent='비밀번호가 맞지 않습니다.'}
 document.getElementById('auth-pass').addEventListener('keydown',e=>{if(e.key==='Enter')checkPassword()});
@@ -103,9 +130,10 @@ function exportJSON(){
     if(filtered.length) exportData[k] = filtered;
   });
   const payload = {
-    version: 1,
+    version: 2,
     exportedAt: new Date().toISOString(),
-    data: exportData
+    data: exportData,
+    dutySettings: monthlyDutySettings
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
@@ -134,11 +162,13 @@ function importJSON(event){
       // 유효성 검사
       if(!parsed.data || typeof parsed.data !== 'object') throw new Error('올바른 형식이 아닙니다.');
       _pendingImportData = parsed.data;
+      _pendingImportSettings = parsed.dutySettings || null;
       const totalDays = Object.keys(parsed.data).length;
       const totalEntries = Object.values(parsed.data).reduce((s,v)=>s+v.length,0);
       const exportedAt = parsed.exportedAt ? new Date(parsed.exportedAt).toLocaleString('ko-KR') : '알 수 없음';
+      const settingMsg = _pendingImportSettings ? '<br><b>월별 당직 설정:</b> 포함' : '<br><b>월별 당직 설정:</b> 없음';
       document.getElementById('json-confirm-msg').innerHTML =
-        `<b>파일:</b> ${file.name}<br><b>저장일시:</b> ${exportedAt}<br><b>일정 수:</b> ${totalDays}일, 총 ${totalEntries}개<br><br>기존 일정을 유지하면서 추가하거나, 전체 교체할 수 있어요.`;
+        `<b>파일:</b> ${file.name}<br><b>저장일시:</b> ${exportedAt}<br><b>일정 수:</b> ${totalDays}일, 총 ${totalEntries}개${settingMsg}<br><br>기존 일정을 유지하면서 추가하거나, 전체 교체할 수 있어요.`;
       document.getElementById('json-confirm-modal').style.display = 'flex';
     } catch(err) {
       alert('JSON 파일을 읽을 수 없습니다: ' + err.message);
@@ -150,6 +180,7 @@ function importJSON(event){
 function closeJsonConfirm(){
   document.getElementById('json-confirm-modal').style.display = 'none';
   _pendingImportData = null;
+  _pendingImportSettings = null;
 }
 
 function confirmReplace(){
@@ -166,6 +197,10 @@ function confirmReplace(){
     if(!data[k]) data[k] = [];
     data[k] = data[k].concat(gcalEntries[k]);
   });
+  if(_pendingImportSettings){
+    monthlyDutySettings = _pendingImportSettings;
+    persistDutySettings();
+  }
   closeJsonConfirm();
   render();
   setStatus('JSON 파일로 전체 교체 완료!', isSignedIn);
@@ -181,6 +216,10 @@ function confirmMerge(){
       if(!dup) data[k].push(newEntry);
     });
   });
+  if(_pendingImportSettings){
+    monthlyDutySettings = {...monthlyDutySettings, ..._pendingImportSettings};
+    persistDutySettings();
+  }
   closeJsonConfirm();
   render();
   setStatus('JSON 파일 병합 완료!', isSignedIn);
@@ -195,13 +234,38 @@ async function fetchGcalEvents(){if(!isSignedIn){handleGcalBtn();return}setStatu
 
 function autoAssign(){
   const y=cur.getFullYear(),m=cur.getMonth(),last=new Date(y,m+1,0).getDate();
-  for(let d=1;d<=last;d++){const k=key(y,m,d);if(data[k])data[k]=data[k].filter(e=>e.type!=='duty')}
+  const mk=monthSettingKey(y,m);
+  monthlyDutySettings[mk]=readDutySettingPanel();
+  persistDutySettings();
+  const setting=getDutySettingForMonth(y,m);
+
+  for(let d=1;d<=last;d++){
+    const k=key(y,m,d);
+    if(data[k]) data[k]=data[k].filter(e=>e.type!=='duty');
+  }
+
   let idx=Number(document.getElementById('start-teacher').value||0);
-  for(let d=1;d<=last;d++){const k=key(y,m,d),dow=new Date(y,m,d).getDay();if(dow===0||dow===6||isHoliday(k))continue;if(!data[k])data[k]=[];data[k].push({type:'duty',text:TEACHERS[idx%TEACHERS.length]});idx++}
-  render();setStatus(isSignedIn?'구글 캘린더 연동됨 · 당직 자동배정 완료!':'당직 자동배정 완료! 구글 캘린더도 연동해보세요.',isSignedIn)
+  for(let d=1;d<=last;d++){
+    const k=key(y,m,d),dow=new Date(y,m,d).getDay();
+    if(dow===0||dow===6||isHoliday(k)) continue;
+
+    const assigned=setting[dow];
+    let teacher=null;
+    if(assigned==='rotate'){
+      teacher=TEACHERS[idx%TEACHERS.length];
+      idx++;
+    }else{
+      teacher=assigned;
+    }
+    if(!teacher) continue;
+    if(!data[k]) data[k]=[];
+    data[k].push({type:'duty',text:teacher});
+  }
+  render();
+  setStatus(`${mk} 요일별 당직 자동배정 완료!`,isSignedIn)
 }
 
-function render(){const y=cur.getFullYear(),m=cur.getMonth();document.getElementById('mlabel').textContent=`${y}년 ${MKR[m]}`;const cal=document.getElementById('cal');cal.innerHTML=DAYS.map(d=>`<div class="day-header">${d}</div>`).join('');const first=new Date(y,m,1).getDay(),last=new Date(y,m+1,0).getDate(),td=todayKey();for(let i=0;i<first;i++)cal.innerHTML+='<div class="cell empty"></div>';for(let d=1;d<=last;d++){const k=key(y,m,d),dow=new Date(y,m,d).getDay(),cls=(dow===0?' sun':dow===6?' sat':''),entries=data[k]||[];let tags=entries.slice(0,4).map(e=>{if(e.type==='duty'){const ti=TEACHERS.indexOf(e.text);const co=ti>=0?TC[ti]:'#185FA5';return `<span class="tag" style="background:#fff;color:${co};border:1px solid ${co}">${e.text}</span>`}return `<span class="tag t-${e.type}">${e.text}</span>`}).join('');if(entries.length>4)tags+=`<span style="font-size:9px;color:#888">+${entries.length-4}</span>`;cal.innerHTML+=`<div class="cell${cls}${k===td?' today':''}" onclick="openDetail('${k}',${d})"><div class="dnum">${d}</div>${tags}</div>`}const rem=(7-(first+last)%7)%7;for(let i=0;i<rem;i++)cal.innerHTML+='<div class="cell empty"></div>';renderStats()}
+function render(){const y=cur.getFullYear(),m=cur.getMonth();document.getElementById('mlabel').textContent=`${y}년 ${MKR[m]}`;syncDutySettingPanel();const cal=document.getElementById('cal');cal.innerHTML=DAYS.map(d=>`<div class="day-header">${d}</div>`).join('');const first=new Date(y,m,1).getDay(),last=new Date(y,m+1,0).getDate(),td=todayKey();for(let i=0;i<first;i++)cal.innerHTML+='<div class="cell empty"></div>';for(let d=1;d<=last;d++){const k=key(y,m,d),dow=new Date(y,m,d).getDay(),cls=(dow===0?' sun':dow===6?' sat':''),entries=data[k]||[];let tags=entries.slice(0,4).map(e=>{if(e.type==='duty'){const ti=TEACHERS.indexOf(e.text);const co=ti>=0?TC[ti]:'#185FA5';return `<span class="tag" style="background:#fff;color:${co};border:1px solid ${co}">${e.text}</span>`}return `<span class="tag t-${e.type}">${e.text}</span>`}).join('');if(entries.length>4)tags+=`<span style="font-size:9px;color:#888">+${entries.length-4}</span>`;cal.innerHTML+=`<div class="cell${cls}${k===td?' today':''}" onclick="openDetail('${k}',${d})"><div class="dnum">${d}</div>${tags}</div>`}const rem=(7-(first+last)%7)%7;for(let i=0;i<rem;i++)cal.innerHTML+='<div class="cell empty"></div>';renderStats()}
 
 function renderStats(){const y=cur.getFullYear(),m=cur.getMonth(),last=new Date(y,m+1,0).getDate(),counts=TEACHERS.map(()=>0);for(let d=1;d<=last;d++){(data[key(y,m,d)]||[]).forEach(e=>{if(e.type==='duty'){const i=TEACHERS.indexOf(e.text);if(i>=0)counts[i]++}})}document.getElementById('stats-bar').innerHTML=TEACHERS.map((t,i)=>`<div class="stat-card"><div class="stat-name" style="color:${TC[i]}">${t}</div><div class="stat-num">${counts[i]}</div><div class="stat-sub">당직 횟수</div></div>`).join('')}
 
