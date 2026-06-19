@@ -84,6 +84,7 @@ body{font-family:Arial,'Noto Sans KR',sans-serif;background:#fff;color:#222}.wra
 const APP_PASSWORD='maru2026';
 const CLIENT_ID='682075457599-5p3hujotoftlcbk629b8t3mmqbmrfu0k.apps.googleusercontent.com';
 const SCOPES='https://www.googleapis.com/auth/calendar.readonly';
+const HOLIDAY_CALENDAR_ID='ko.south_korea#holiday@group.v.calendar.google.com';
 const TEACHERS=['김진경 T','장현주 T','박정노 T','김혜민 T'];
 const TC=['#185FA5','#3B6D11','#854F0B','#D94F70'];
 const DAYS=['일','월','화','수','목','금','토'];
@@ -230,7 +231,52 @@ function loadGapiScript(){return new Promise(res=>{if(window.gapi){res();return}
 function loadGisScript(){return new Promise(res=>{if(window.google&&google.accounts){gisReady=true;res();return}const s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.onload=()=>{tokenClient=google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:SCOPES,callback:async(resp)=>{if(resp.error){setStatus('연동 실패: '+resp.error,false);return}isSignedIn=true;setStatus('구글 캘린더 연동됨',true);document.getElementById('gcal-btn').textContent='✓ 다시 불러오기';document.getElementById('gcal-btn').onclick=fetchGcalEvents;await fetchGcalEvents()}});gisReady=true;res()};document.head.appendChild(s)})}
 async function handleGcalBtn(){setStatus('구글 로그인 준비 중...',false,true);if(!gapiReady||!gisReady)await Promise.all([loadGapiScript(),loadGisScript()]);tokenClient.requestAccessToken({prompt:'consent'})}
 function setStatus(msg,connected,loading){const dot=document.getElementById('status-dot');dot.className='status-dot'+(connected?' connected':loading?' loading':'');document.getElementById('status-text').textContent=msg}
-async function fetchGcalEvents(){if(!isSignedIn){handleGcalBtn();return}setStatus('구글 캘린더 불러오는 중...',false,true);const {timeMin,timeMax}=monthRangeKst();try{const resp=await gapi.client.calendar.events.list({calendarId:'primary',timeMin,timeMax,timeZone:'Asia/Seoul',singleEvents:true,orderBy:'startTime',maxResults:100});Object.keys(data).forEach(k=>{data[k]=data[k].filter(e=>e.type!=='gcal');if(!data[k].length)delete data[k]});let count=0;(resp.result.items||[]).forEach(ev=>{const start=ev.start.date||ev.start.dateTime;if(!start)return;const d=ev.start.date?ev.start.date:kstDateFromDateTime(ev.start.dateTime);const id=gcalId(ev);if(hiddenGcal[id])return;if(!data[d])data[d]=[];data[d].push({type:'gcal',text:ev.summary||'(제목 없음)',gcalId:id});count++});setStatus(`구글 캘린더 연동됨 · 이번 달 원본 일정 ${count}개 표시`,true);render()}catch(e){setStatus('불러오기 실패: '+e.message,false)}}
+async function fetchGcalEvents(){
+  if(!isSignedIn){handleGcalBtn();return}
+  setStatus('구글 캘린더와 공휴일 불러오는 중...',false,true);
+  const {timeMin,timeMax}=monthRangeKst();
+  try{
+    Object.keys(data).forEach(k=>{
+      data[k]=data[k].filter(e=>e.type!=='gcal' && e.source!=='googleHoliday');
+      if(!data[k].length)delete data[k];
+    });
+
+    const [primaryResp, holidayResp] = await Promise.all([
+      gapi.client.calendar.events.list({calendarId:'primary',timeMin,timeMax,timeZone:'Asia/Seoul',singleEvents:true,orderBy:'startTime',maxResults:100}),
+      gapi.client.calendar.events.list({calendarId:HOLIDAY_CALENDAR_ID,timeMin,timeMax,timeZone:'Asia/Seoul',singleEvents:true,orderBy:'startTime',maxResults:100})
+    ]);
+
+    let count=0, holidayCount=0;
+    (primaryResp.result.items||[]).forEach(ev=>{
+      const start=ev.start.date||ev.start.dateTime;
+      if(!start)return;
+      const d=ev.start.date?ev.start.date:kstDateFromDateTime(ev.start.dateTime);
+      const id='primary|'+gcalId(ev);
+      if(hiddenGcal[id])return;
+      if(!data[d])data[d]=[];
+      const text=ev.summary||'(제목 없음)';
+      const dup=data[d].some(e=>e.type==='gcal' && e.text===text && e.gcalId===id);
+      if(!dup){data[d].push({type:'gcal',text,gcalId:id});count++}
+    });
+
+    (holidayResp.result.items||[]).forEach(ev=>{
+      const start=ev.start.date||ev.start.dateTime;
+      if(!start)return;
+      const d=ev.start.date?ev.start.date:kstDateFromDateTime(ev.start.dateTime);
+      const id='holiday|'+gcalId(ev);
+      if(hiddenGcal[id])return;
+      if(!data[d])data[d]=[];
+      const text=ev.summary||'(공휴일)';
+      const dup=data[d].some(e=>e.type==='holiday' && e.text===text);
+      if(!dup){data[d].push({type:'holiday',text,gcalId:id,source:'googleHoliday'});holidayCount++}
+    });
+
+    setStatus(`구글 캘린더 연동됨 · 개인 일정 ${count}개 · 공휴일 ${holidayCount}개 표시`,true);
+    render();
+  }catch(e){
+    setStatus('불러오기 실패: '+e.message,false);
+  }
+}
 
 function autoAssign(){
   const y=cur.getFullYear(),m=cur.getMonth(),last=new Date(y,m+1,0).getDate();
