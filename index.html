@@ -30,7 +30,7 @@ body{font-family:Arial,'Noto Sans KR',sans-serif;background:#fff;color:#222}.wra
   <select id="start-teacher" style="padding:10px 14px;border-radius:10px;border:1px solid #ccc;font-weight:600;background:white;color:#111;">
     <option value="0">김진경 T부터</option>
     <option value="1">장현주 T부터</option>
-    <option value="2">박정노 T부터</option>
+    <option value="2">김의현 T부터</option>
     <option value="3">김혜민 T부터</option>
   </select>
   <button class="btn green" onclick="autoAssign()">⟳ 당직 자동배정</button>
@@ -85,11 +85,11 @@ const APP_PASSWORD='maru2026';
 const CLIENT_ID='682075457599-5p3hujotoftlcbk629b8t3mmqbmrfu0k.apps.googleusercontent.com';
 const SCOPES='https://www.googleapis.com/auth/calendar.readonly';
 const HOLIDAY_CALENDAR_ID='ko.south_korea#holiday@group.v.calendar.google.com';
-const TEACHERS=['김진경 T','장현주 T','박정노 T','김혜민 T'];
+const TEACHERS=['김진경 T','장현주 T','김의현 T','김혜민 T'];
 const TC=['#185FA5','#3B6D11','#854F0B','#D94F70'];
 const DAYS=['일','월','화','수','목','금','토'];
 const DUTY_SETTING_STORAGE_KEY='maruDutySettingsV1';
-const DEFAULT_DUTY_SETTING={1:'김진경 T',2:'장현주 T',3:'박정노 T',4:'rotate',5:'김혜민 T'};
+const DEFAULT_DUTY_SETTING={1:'김진경 T',2:'장현주 T',3:'김의현 T',4:'rotate',5:'김혜민 T'};
 let monthlyDutySettings=loadDutySettings();
 const MKR=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
 
